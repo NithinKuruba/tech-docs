@@ -5,6 +5,7 @@
 - Download the latest [latest-distrod-wsl-launcher](https://github.com/nullpo-head/wsl-distrod/releases/latest/download/distrod_wsl_launcher-x86_64.zip) and start the launcher
 - Select `Ubuntu` and `focal` in the available options and continue to install
 - It asks for username and password as part of the installation process
+- Verify is `systemd` is running using `ps -ef | grep -i systemd`
 
 ## Docker Setup
 
@@ -38,6 +39,12 @@
 - To use docker as non-root user
   ```bash
   sudo usermod -aG docker $USER
+  ```
+- Automatically start on startup
+  ```bash
+  sudo systemctl enable docker.service
+
+  sudo systemctl enable containerd.service
   ```
 
 ## References
