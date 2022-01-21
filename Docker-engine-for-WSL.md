@@ -2,11 +2,8 @@
 
 ## Installation - Ubuntu
 
-- Download the latest [latest-distrod-wsl-launcher](https://github.com/nullpo-head/wsl-distrod/releases/latest/download/distrod_wsl_launcher-x86_64.zip)
-
-- Start the launcher and press enter
-- Select `Ubuntu` and `focal` in the available options
-- The launcher installs the distribution
+- Download the latest [latest-distrod-wsl-launcher](https://github.com/nullpo-head/wsl-distrod/releases/latest/download/distrod_wsl_launcher-x86_64.zip) and start the launcher
+- Select `Ubuntu` and `focal` in the available options and continue to install
 - It asks for username and password as part of the installation process
 
 ## Docker Setup
