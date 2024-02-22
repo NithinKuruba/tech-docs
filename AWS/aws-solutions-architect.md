@@ -105,8 +105,30 @@
 
 - S3 using AWS KMS can encrypt objects at rest, however even client can encrypt at client side and send to S3 as an alternative
 
-- SSE-S3 is AWS managed keys including rotation and master key
+- SSE-S3: AWS manages master and data keys
 
-- SSE-KMS where client manages keys and AWS managed key management. It also enables access logging and shows failed attempts
+- SSE-KMS where client manages master key (enables authorized access only) and AWS KMS manages data keys. KMS also enables access logging and could show failed attempts
+
+- SSE-C where client manages all keys. S3 encrypts data and client decrypts data upon retrieval
+
+- Versioning can be turned on at bucket level
+
+- Presigned URL: Share objects with others for a limited time
+
+- Multipart Uploading supports uploading of large objects. It allows for pause and resume of uploading process. It is advised to use this feature for files larger than 5GB. It is a three step process: Initiation, upload parts and completion. AWS CLI uses this feature automatically 
+
+- S3 support server access logging
+
+- Cloudfront infront of S3 enables caching when using static website
+
+- One archive can contain 40TB of data
+
+- It takes 3 to 5 hours to pull data from archives
+
+- All archives are automatically encrypted and are immutable
+
+- A Vault stores archives and each AWS account can have upto 1000 Vaults
+
+- Vaults can be protected using IAM policies
 
 
