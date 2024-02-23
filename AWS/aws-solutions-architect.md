@@ -101,6 +101,8 @@
 
 - Life cycle policies ensure data moves to different storage types and deleted when not needed
 
+- Range GETs allow to download portions of objects in case of poor network connection 
+
 - All data to and from S3 is encrypted through SSL
 
 - S3 using AWS KMS can encrypt objects at rest, however even client can encrypt at client side and send to S3 as an alternative
