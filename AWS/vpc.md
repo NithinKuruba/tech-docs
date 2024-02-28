@@ -87,3 +87,29 @@
 - 500 max security groups per VPC
 - 50 max inbound and 50 max outbound per security group
 - Can change security group after EC2 is launched
+
+## Network Access Control Lists
+
+- It's stateless firewall applied at subnet level
+- When VPC is created, the public subnet is associated with default ACL that allows all inbound and outbound traffic
+- A new custom ACL will deny all inbound and outbound traffic by default unless changed
+- Every subnet must be associated with one ACL
+
+## Network Address Translation
+
+- Instances in private subnet cannot access internet through IGW so NAT gateways let's instances connect to IGW
+- NAT gateways provide better availability, higher bandwidth and less administration than NAT instances
+- NAT instance translates private IP of EC2 instance in private subnet to it's public IP and forwards traffic to IGW to connect to internet
+- NAT gateways operate similarly but requires less admin work
+- Both NAT gateways and instances block the access from internet to instances in private subnet
+
+## Virtual Private Gateway, Custom Gateway and Virtual Private Networks
+
+- VPC can connect to an existing data center through two ways, VPG and CGW
+- VPG is a VPN on the AWS side between two networks
+- CGW represents physical device on customer side of VPN connection
+- After VPG and VPN are created, a VPN tunnel is established
+- VPN connection can use either dynamic or static routing
+- VPG supports multiple CGWs with VPN connections and CGW IP addresses must be unique for that region
+- VPN tunnel is initiated from CGW to VPG
+- VPN connection consists of two tunnels for high availability to VPC
