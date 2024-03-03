@@ -61,3 +61,23 @@
 
 - A service to monitor AWS resources and applications in real time
 - It can collect metrics, create alarms that send notifications and make changes to resources being monitored based on the rules set
+- It support actions like sending notifications or scaling resources through auto scaling policy
+- Basic monitoring is free but limited preselected metrics and minimum tracking of 5 minutes
+- Detailed monitoring allows for minimum of 1 minute tracking
+- It does not aggregate data across regions but across AZs within a region
+- AWS does not know of memory, cpu and disk consumption inside EC2 so CloudWatch supports an API endpoint to which apps can make PUT requests to send metrics
+- CloudWatch can be used to store, monitor and access logs from applications running inside EC2
+- Monitoring can be setup to lookout for errors in log files at app level and send notifications or take necessary actions
+- Logs can be stored in S3 or Glacier
+- A CloudWatch agent also can be installed in EC2 which can send metrics
+- Each AWS account limited to 5000 alarms
+- Metric data is retained for two weeks by default but can be moved to S3 for long term storage
+
+## AutoScaling
+
+- This service scales EC2 instances in response to the incoming traffic
+- AutoScaling schemes:
+  - Maintain Current Instance Levels: This maintains minimum number of running instances at all times. Removes unhealthy ones with new
+  - Manual Scaling: Update maximum, minimum and desired capacity and auto scaling group manages the capacity. Useful for Infrequent events
+  - Scheduled Scaling: Suitable for predictable schedule of events. Scaling actions are performed automatically as aa function of date and time
+  - Dynamic Scaling: Auto Scaling policies dictate AutoScaling process. CloudWatch can monitor some parameters and callout AutoScaling group to update capacity
