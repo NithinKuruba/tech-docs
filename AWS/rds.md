@@ -22,4 +22,4 @@
 
 ### RDS
 
-- 
+- It handles ops like backups, patching, scaling and replication
