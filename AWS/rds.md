@@ -23,3 +23,4 @@
 ### RDS
 
 - It handles ops like backups, patching, scaling and replication
+- It replicates data across AZs, improve durability, or scale up or beyond a single database instance for read heavy database workloads
