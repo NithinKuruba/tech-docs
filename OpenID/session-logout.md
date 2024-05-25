@@ -17,3 +17,7 @@ RP's need a way to be able to monitor authenticated end user state at OP. Follow
 The RP loads an invisible iframe which knows ID and origin URI of the OP iframe. The RP does `postMessage` of `Client ID + " " + Session State` to OP iframe and it receives one of the three responses `unchanged`, `changed`, and `error`.
 
 Upon receipt of response `changed`, the RP makes authentication request with `prompt=none` and if it receives new ID Token from OP, it simply updates the state at its end. The RP iframe continues the polling again. In case of receiving `unchanged`, the RP does nothing. The end user will be forced to login if RP receives `error` response.
+
+### OP iframe
+
+The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The RP iframe loads another iframe using the source URI 
