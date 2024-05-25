@@ -16,13 +16,14 @@ RP's need a way to be able to monitor authenticated end user state at OP. Follow
 
 ### RP iframe
 
-OpenID Connect session management works with two hidden iframes where both reside at the RP. One is from the RP itself and the other is from the OP. When authenticating, the OP sends an iframe to the RP. The RP embed this OP-provided iframe into the RP. The RP checks the session state via the RP iframe by continuously polling the embedded OP provided iframe, without causing network traffic. Thereby, the RP is notified when the session state of the end-user has changed. The RP does `postMessage` of `Client ID + " " + Session State` to embedded OP iframe. 
+OpenID Connect session management works with two hidden iframes where both reside at the RP. One is from the RP itself and the other is from the OP. When authenticating, the OP sends an iframe to the RP. The RP embed this OP-provided iframe into the RP. The RP checks the session state via the RP iframe by continuously polling the embedded OP provided iframe, without causing network traffic. Thereby, the RP is notified when the session state of the end-user has changed. The RP does `postMessage` of `Client ID + " " + Session State` to embedded OP iframe. Below are the steps as follows
 
 1. The RP iframe polls the OP iframe for a session status.
 1. The OP iframe sends back a message (by using HTML5 Window.postMessage()) about the session state as 'changed, 'unchanged' or 'error'.
 1. If the session state is 'changed', the RP sends a passive request for re-authentication.
 1. If the end user has logged out from the OP, the RP will receive an authentication failure message along with a new session state value. The RP handles this as a end user logout.
 1. If the end user has not logged out, the RP will receive a successful authentication response along with a new session state value.
+
 ### OP iframe
 
-The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The URI found under `check_session_iframe` is used as the source for embedded iframe in RP iframe. The embedded iframe has access to user agent state of OP
+The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The URI found under `check_session_iframe` property is used as the source for embedded iframe in RP iframe. The embedded iframe has access to user agent state (stored in a cookie or local storage) of OP. The RP iframe polls this embedded iframe for monitoring session of end user.
