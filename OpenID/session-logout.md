@@ -10,4 +10,10 @@ The `session_state` is a value of salted cryptographic hash of Client ID, Origin
 
 ## Session Monitoring
 
-RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. 
+RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. A potential solution to this problem is through iframes. RP has its own invisible iframe that polls OP iframe's `postMessage` response for the end user's state.
+
+### RP iframe
+
+The RP loads an invisible iframe which knows ID and origin URI of the OP iframe. The RP does `postMessage` of `Client ID + " " + Session State` to OP iframe and it receives one of the three responses `unchanged`, `changed`, and `error`.
+
+Upon receipt of response `changed`, the RP makes authentication request with `prompt=none` and if it receives new ID Token from OP, it simply updates the state at its end. The RP iframe continues the polling again. In case of receiving `unchanged`, the RP does nothing. The end user will be forced to login if RP receives `error` response.
