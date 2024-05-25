@@ -8,7 +8,7 @@ The session of an end user typically starts when RP gets and validated an ID Tok
 
 The `session_state` is a value of salted cryptographic hash of Client ID, Origin URI, and OP user agent state. The value is recalculated by the OP iframe.
 
-## Session Monitoring
+## Session Management
 
 RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. A potential solution to this problem is through iframes. RP has its own invisible iframe that polls OP iframe's `postMessage` response for the end user's state.
 
@@ -26,4 +26,7 @@ OpenID Connect session management works with two hidden iframes where both resid
 
 ### OP iframe
 
-The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The URI found under `check_session_iframe` property is used as the source for embedded iframe in RP iframe. The embedded iframe has access to user agent state (stored in a cookie or local storage) of OP. The RP iframe polls this embedded iframe for monitoring session of end user.
+The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The URI found under `check_session_iframe` property is used as the source for embedded iframe in RP iframe. The embedded iframe has access to user agent state (stored in a cookie or local storage) of OP. The RP iframe polls this embedded iframe for monitoring session of end user. The OP updates the user agent state based on the events triggered by end user like login, logout etc. This updated state is tracked by the OP or embedded iframe, which sends the response based on respective updated state.
+
+## Front Channel Logout
+
