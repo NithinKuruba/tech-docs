@@ -16,7 +16,7 @@ RP's need a way to be able to monitor authenticated end user state at OP. Follow
 
 ### RP iframe
 
-OpenID Connect session management works with two hidden iframes where both reside at the RP. One is from the RP itself and the other is from the OP. When authenticating, the OP sends an iframe to the RP. The RP embed this OP-provided iframe into the RP. The RP checks the session state via the RP iframe by continuously polling the embedded OP provided iframe, without causing network traffic. Thereby, the RP is notified when the session state of the end-user has changed. The RP does `postMessage` of `Client ID + " " + Session State` to OP iframe. 
+OpenID Connect session management works with two hidden iframes where both reside at the RP. One is from the RP itself and the other is from the OP. When authenticating, the OP sends an iframe to the RP. The RP embed this OP-provided iframe into the RP. The RP checks the session state via the RP iframe by continuously polling the embedded OP provided iframe, without causing network traffic. Thereby, the RP is notified when the session state of the end-user has changed. The RP does `postMessage` of `Client ID + " " + Session State` to embedded OP iframe. 
 
 1. The RP iframe polls the OP iframe for a session status.
 1. The OP iframe sends back a message (by using HTML5 Winodw.postMessage()) about the session state as 'changed, 'unchanged' or 'error'.
