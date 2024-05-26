@@ -75,3 +75,4 @@ The token includes mandatory claims such as `iss`, `aud`, `iat`, `exp`, `jti, an
 The token can optionally include `sub` and/or `sid`.
 
 The Logout Token may contain either `sid` or `sub`. If `sid` is excluded then all the sessions identified by `sub` and `iss` are logged out.
+
