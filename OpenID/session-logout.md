@@ -8,6 +8,8 @@ The session of an end user typically starts when RP gets and validated an ID Tok
 
 The `session_state` is a value of salted cryptographic hash of Client ID, Origin URI, and OP user agent state. The value is recalculated by the OP iframe.
 
+## RP Initiated Logout
+
 ## Session Management
 
 RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. A potential solution to this problem is through iframes. RP has its own invisible iframe that polls OP iframe's `postMessage` response for the end user's state.
