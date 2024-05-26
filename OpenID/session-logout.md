@@ -56,6 +56,6 @@ The back channel logout does not use user agents and iframes to communicate logo
 
 The advantage with back channel logout is that it does not depend on user agent tab to be active which is a must for other methods to work. However one down side is that it does not have access to website content like cookies or session/local storage and due to which it has no access to end user data. This needs to be taken care by OP by sending state information explicitly for every logout request sent to RP. Other downsides are that the RP has to create custom logic to remove user state unlike just removing cookies and clearing storage in case of front channel logout, and the RP has to register a logout URI with OP and ensure the OP is able to reach it and not blocked by any firewalls.
 
-The OP has to provide `backchannel_logout_supported`, boolean value in the response of the discovery endpoint so that RP can know if the OP has support for Back Channel Logout.
+The OP has to provide `backchannel_logout_supported`, boolean value in the response of the discovery endpoint so that RP can know if the OP has support for Back Channel Logout. It also has an optional setting called `backchannel_logout_session_supported`, which when requested to set to true by RP, `sid` claim is sent in Logout Token.
 
-The RP can also register `backchannel_logout_session_supported` with OP so that the OP can include `sid` in the ID Token
+The RP has to register `backchannel_logout_uri`
