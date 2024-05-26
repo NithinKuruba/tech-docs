@@ -47,3 +47,9 @@ The RP optionally can register `frontchannel_logout_session_required`, a boolean
 ### User Agent Blocking Third Party Cookies
 
 Due to the blocking of third party cookies, the iframe loaded by OP with RP provided logout URI   would fail and the reason for that is the `frontchannel_logout_uri` in the OP iframe would be blocked from accessing end user's login state as the OP iframe and RP belong to different origins. The back channel logout wouldn't be impacted by this blockage.
+
+## Back Channel Logout
+
+The back channel logout does not use user agents and iframes to communicate logout requests to RPs like the above mentioned methods do, instead it uses direct back channel communication.
+
+The advantage with back channel logout is that it does not depend on user agent tab to be active which is a must for other methods to work. However one down side is that it does not have access to website content like cookies or session/local storage and due to which it has no access to end user data. This needs to be taken care by OP by sending state information explicitly for every logout request sent to RP.
