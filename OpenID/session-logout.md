@@ -76,3 +76,5 @@ The token can optionally include `sub` and/or `sid`.
 
 The Logout Token may contain either `sid` or `sub`. If `sid` is excluded then all the sessions identified by `sub` and `iss` are logged out.
 
+The `nonce` claim is prohibited from being added to Logout Token as this can prevent attackers from reusing Logout Token as an ID Token.
+
