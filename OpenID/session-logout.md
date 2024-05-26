@@ -12,8 +12,6 @@ The `session_state` is a value of salted cryptographic hash of Client ID, Origin
 
 RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. A potential solution to this problem is through iframes. RP has its own invisible iframe that polls OP iframe's `postMessage` response for the end user's state.
 
-
-
 ### RP iframe
 
 OpenID Connect session management works with two hidden iframes where both reside at the RP. One is from the RP itself and the other is from the OP. When authenticating, the OP sends an iframe to the RP. The RP embed this OP-provided iframe into the RP. The RP checks the session state via the RP iframe by continuously polling the embedded OP provided iframe, without causing network traffic. Thereby, the RP is notified when the session state of the end-user has changed. The RP does `postMessage` of `Client ID + " " + Session State` to embedded OP iframe. Below are the steps as follows
@@ -27,6 +25,12 @@ OpenID Connect session management works with two hidden iframes where both resid
 ### OP iframe
 
 The RP saves few endpoints including `check_session_iframe` and `end_session_endpoint` by parsing discovery endpoint response from the OP. The URI found under `check_session_iframe` property is used as the source for embedded iframe in RP iframe. The embedded iframe has access to user agent state (stored in a cookie or local storage) of OP. The RP iframe polls this embedded iframe for monitoring session of end user. The OP updates the user agent state based on the events triggered by end user like login, logout etc. This updated state is tracked by the OP or embedded iframe, which sends the response based on respective updated state.
+
+### User Agent Blocking Third Party Cookies
+
+Some browers are starting to block third party cookies which is creating problems in tracking end user state across sites. The website data can include cookies and session or local storage. Specifically, the website content from site on one origin cannot be accessed by the website on a different origin currently active on a tab in user agent window.
+
+The result of blocking third party cookies is that, the OP iframe cannot access end user state and thus returns `changed` for every callout from RP iframe and this results in infinite loop of re-authentications. The back channel logout is not affected by this blockage.
 
 ## Front Channel Logout
 
