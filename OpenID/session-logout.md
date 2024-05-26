@@ -63,3 +63,15 @@ The OP advertises `backchannel_logout_supported`, boolean metadata value in the 
 ### RP Support For Back Channel Logout
 
 The RP has to register `backchannel_logout_uri` and optionally `backchannel_logout_session_required`, a boolean value to insist OP to pass `sid` in the Logout Token.
+
+### OP Remembering RPs
+
+The OP needs to know which RPs need to be sent logout requests through Back Channel and for this purpose it tracks `visited sites` cookie.
+
+### Logout Token
+
+The token includes mandatory claims such as `iss`, `aud`, `iat`, `exp`, `jti, and `events`.
+
+The token can optionally include `sub` and/or `sid`.
+
+The Logout Token may contain either `sid` or `sub`. If `sid` is excluded then all the sessions identified by `sub` and `iss` are logged out.
