@@ -34,3 +34,16 @@ The result of blocking third party cookies is that, the OP iframe cannot access 
 
 ## Front Channel Logout
 
+Similar to session management, this logout mechanism also uses user agent and iframes to logout users but the only difference is that it does not require RP to have an iframe, instead HTTP GET calls are made to RP URLs to logout the user.
+
+The primary requirement for this feature to work is that RP should support HTTP-based logout and it should be able to register a logout URI with the OP. 
+
+The OP renders `<iframe src="frontchannel_logout_uri">` in a page with the registered logout URI as the source to trigger the logout actions by the RP. Upon receiving a request to render the logout URI in an iframe, the RP clears state associated with the logged-in session, including any cookies and HTML5 local storage.
+
+Optionally the OP can also include `iss` and `sid` in the logout request for RP to consume so that the RP can compare the values with the ones in the saved ID Token received after successful authentication. If the comparison fails, the RP can simply ignore the logout request from the OP.
+
+The RP optionally can register `frontchannel_logout_session_required`, a boolean value that insists OP to include `iss` and `sid` in the logout request to the RP.
+
+### User Agent Blocking Third Party Cookies
+
+Due to the blocking of third party cookies, the iframe loaded by OP with RP provided logout URI   would fail and the reason for that is the `frontchannel_logout_uri` in the OP iframe would be blocked from accessing end user's login state as the OP iframe and RP belong to different origins. The back channel logout wouldn't be impacted by this blockage.
