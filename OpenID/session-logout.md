@@ -44,6 +44,8 @@ Optionally the OP can also include `iss` and `sid` in the logout request for RP 
 
 The RP optionally can register `frontchannel_logout_session_required`, a boolean value that insists OP to include `iss` and `sid` in the logout request to the RP.
 
+The OP has to provide `frontchannel_logout_supported`, boolean value in the response of the discovery endpoint so that RP can know if the OP has support for Front Channel Logout.
+
 ### User Agent Blocking Third Party Cookies
 
 Due to the blocking of third party cookies, the iframe loaded by OP with RP provided logout URI   would fail and the reason for that is the `frontchannel_logout_uri` in the OP iframe would be blocked from accessing end user's login state as the OP iframe and RP belong to different origins. The back channel logout wouldn't be impacted by this blockage.
@@ -52,4 +54,8 @@ Due to the blocking of third party cookies, the iframe loaded by OP with RP prov
 
 The back channel logout does not use user agents and iframes to communicate logout requests to RPs like the above mentioned methods do, instead it uses direct back channel communication.
 
-The advantage with back channel logout is that it does not depend on user agent tab to be active which is a must for other methods to work. However one down side is that it does not have access to website content like cookies or session/local storage and due to which it has no access to end user data. This needs to be taken care by OP by sending state information explicitly for every logout request sent to RP.
+The advantage with back channel logout is that it does not depend on user agent tab to be active which is a must for other methods to work. However one down side is that it does not have access to website content like cookies or session/local storage and due to which it has no access to end user data. This needs to be taken care by OP by sending state information explicitly for every logout request sent to RP. Other downsides are that the RP has to create custom logic to remove user state unlike just removing cookies and clearing storage in case of front channel logout, and the RP has to register a logout URI with OP and ensure the OP is able to reach it and not blocked by any firewalls.
+
+The OP has to provide `backchannel_logout_supported`, boolean value in the response of the discovery endpoint so that RP can know if the OP has support for Back Channel Logout.
+
+The RP can also register `backchannel_logout_session_supported` with OP so that the OP can include `sid` in the ID Token
