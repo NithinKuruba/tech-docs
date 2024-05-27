@@ -14,6 +14,8 @@ The RP request OP to logout the authenticated end user. This is done through red
 
 ### Terminology
 
+The id_token_hint is recommended and rest of the params are optional.
+
 #### id_token_hint
 
 The ID Token previously issued by the OP to RP. This needs to be passed to logout endpoint as a hint about end user to be logged out
@@ -21,9 +23,24 @@ The ID Token previously issued by the OP to RP. This needs to be passed to logou
 
 #### logout_hint
 
+It's an hint to OP about the end user being logged out. Example values include email, username, and sid.
 
+#### client_id
 
+Client Identifier through which OP can identify the client
 
+#### post_logout_redirect_uri
+
+The RP URI to which end user is redirected after a successful logout
+
+#### state
+
+String value to maintain state between logout and redirection to `post_logout_redirect_uri`
+
+### Rules
+
+- RP can either use GET or POST methods to send logout requests to OP.
+- When id_token_hint is included, the OP should verify issuer, exp, aud, and/or Sid claims as part of the validation. If same is not included then the OP should ask user if wish to logout globally and if user confirms yes then OP uses one of the below mentioned logout schemes to perform a global logout.
 
 ## Session Management
 
