@@ -10,6 +10,21 @@ The `session_state` is a value of salted cryptographic hash of Client ID, Origin
 
 ## RP Initiated Logout
 
+The RP request OP to logout the authenticated end user. This is done through redirecting end user to the logout endpoint of the OP. The logout endpoint is obtained from `end_session_endpoint` from the OPs discovery endpoint response.
+
+### Terminology
+
+#### id_token_hint
+
+The ID Token previously issued by the OP to RP. This needs to be passed to logout endpoint as a hint about end user to be logged out
+
+
+#### logout_hint
+
+
+
+
+
 ## Session Management
 
 RP's need a way to be able to monitor authenticated end user state at OP. Following the `exp` claim in the ID Token is a way to logout user. If the user logged out at OP even before `exp` claim then RP need a way to logout end user and this can be accomplished by making authentication requests with `prompt=none`(does not prompt end user to enter credentials). However, this could result in high network traffic to OP. A potential solution to this problem is through iframes. RP has its own invisible iframe that polls OP iframe's `postMessage` response for the end user's state.
