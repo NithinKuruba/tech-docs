@@ -12,8 +12,8 @@ Additionally the client has to authenticate with authorization server prior to m
 
 ```sh
 POST /revoke HTTP/1.1
-     Host: server.example.com
-     Content-Type: application/x-www-form-urlencoded
-     Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-     token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
+Host: server.example.com
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+    token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
 ```
