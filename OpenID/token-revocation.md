@@ -17,3 +17,5 @@ Content-Type: application/x-www-form-urlencoded
 Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
 token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
 ```
+
+# Introspection 
