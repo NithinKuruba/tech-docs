@@ -58,6 +58,7 @@ For example, the following response contains a set of information about an activ
 
 The following is a non-normative example response:
 
+```
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -73,15 +74,18 @@ Content-Type: application/json
   "iat": 1419350238,
   "extension_field": "twenty-seven"
 }
+```
 
 If the introspection call is properly authorized but the token is not active, does not exist on this server, or the protected resource is not allowed to introspect this particular token, then the authorization server MUST return an introspection response with the
 "active" field set to "false".  Note that to avoid disclosing too much of the authorization server's state to a third party, the authorization server SHOULD NOT include any additional information about an inactive token, including why the token is inactive.
 
 The following is a non-normative example response for a token that has been revoked or is otherwise invalid:
 
+```
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
   "active": false
 }
+```
