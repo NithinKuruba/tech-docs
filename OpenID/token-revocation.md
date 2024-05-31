@@ -53,3 +53,35 @@ Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
 
 token=mF_9.B5f-4.1JqM&token_type_hint=access_token
 ```
+
+For example, the following response contains a set of information about an active token:
+
+The following is a non-normative example response:
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "active": true,
+  "client_id": "l238j323ds-23ij4",
+  "username": "jdoe",
+  "scope": "read write dolphin",
+  "sub": "Z5O3upPC88QrAjx00dis",
+  "aud": "https://protected.example.net/resource",
+  "iss": "https://server.example.com/",
+  "exp": 1419356238,
+  "iat": 1419350238,
+  "extension_field": "twenty-seven"
+}
+
+If the introspection call is properly authorized but the token is not active, does not exist on this server, or the protected resource is not allowed to introspect this particular token, then the authorization server MUST return an introspection response with the
+"active" field set to "false".  Note that to avoid disclosing too much of the authorization server's state to a third party, the authorization server SHOULD NOT include any additional information about an inactive token, including why the token is inactive.
+
+The following is a non-normative example response for a token that has been revoked or is otherwise invalid:
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "active": false
+}
