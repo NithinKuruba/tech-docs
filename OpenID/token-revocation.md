@@ -42,8 +42,10 @@ The protected resource also sends a token type hint indicating that it is inquir
 
 The following is a non-normative example request:
 
+```sh
 POST /introspect HTTP/1.1
 Host: server.example.com
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW token=mF_9.B5f-4.1JqM&token_type_hint=access_token
+```
