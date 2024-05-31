@@ -47,5 +47,7 @@ POST /introspect HTTP/1.1
 Host: server.example.com
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW token=mF_9.B5f-4.1JqM&token_type_hint=access_token
+Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW 
+
+token=mF_9.B5f-4.1JqM&token_type_hint=access_token
 ```
