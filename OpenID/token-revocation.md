@@ -19,7 +19,7 @@ Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
 token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
 ```
 
-# Introspection 
+# Token Introspection 
 
 The authorization server's introspection endpoint accepts a token and returns metadata of that token including its status like active.
 
