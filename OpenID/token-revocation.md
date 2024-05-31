@@ -15,6 +15,7 @@ POST /revoke HTTP/1.1
 Host: server.example.com
 Content-Type: application/x-www-form-urlencoded
 Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+
 token=45ghiukldjahdnhzdauz&token_type_hint=refresh_token
 ```
 
@@ -33,6 +34,7 @@ Host: server.example.com
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer 23410913-abewfq.123483
+
 token=2YotnFZFEjr1zCsicMWpAA
 ```
 
